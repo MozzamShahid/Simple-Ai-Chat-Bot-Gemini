@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { databases, storage, ID } from '../lib/appwrite'; // Ensure the correct path to Appwrite lib
+import { databases, storage, ID } from '../../lib/appwrite'; // Ensure the correct path to Appwrite lib
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaTrashAlt, FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
@@ -8,15 +8,17 @@ const EditProduct = () => {
   const [productData, setProductData] = useState({
     product_name: '',
     price: '',
+    compare_price: '',
     product_image: '',
     product_other_images: [],
-    description: '',
+    product_description: '',
     additional_description: '',
     tags: [],
     variant_prices: [],
   });
   const [mainImage, setMainImage] = useState(null); // For main image preview
   const [newOtherImages, setNewOtherImages] = useState([]); // For uploading new other images
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,10 +34,9 @@ const EditProduct = () => {
     fetchProduct();
   }, [id]);
 
-  // Handle form submission for editing
   const handleEdit = async (e) => {
     e.preventDefault();
-
+  
     // Handle main image upload
     if (mainImage) {
       try {
@@ -45,7 +46,7 @@ const EditProduct = () => {
         console.error('Error uploading main image:', error);
       }
     }
-
+  
     // Handle other images upload
     if (newOtherImages.length > 0) {
       const uploadedImages = [];
@@ -59,15 +60,21 @@ const EditProduct = () => {
       }
       productData.product_other_images = [...productData.product_other_images, ...uploadedImages];
     }
-
+  
+    // Remove system attributes before updating
+    const { $id, $databaseId, $collectionId, ...updatedProductData } = productData;
+  
     // Update product in Appwrite database
     try {
-      await databases.updateDocument('DataMehb_', '66d8541f00396da8ee79', id, productData);
+      await databases.updateDocument('DataMehb_', '66d8541f00396da8ee79', id, updatedProductData);
+      setMessage('Product updated successfully');
       navigate('/show-product'); // Redirect to product list after editing
     } catch (error) {
       console.error('Error updating product:', error);
+      setMessage('Error updating product');
     }
   };
+  
 
   // Handle reordering of other images
   const moveImage = (index, direction) => {
@@ -118,12 +125,24 @@ const EditProduct = () => {
           />
         </div>
 
+        {/* Compare Price */}
+        <div className="mb-4">
+          <label className="block mb-2 text-sm font-semibold">Compare Price (PKR)</label>
+          <input
+            type="number"
+            value={productData.compare_price}
+            onChange={(e) => setProductData({ ...productData, compare_price: e.target.value })}
+            className="w-full px-4 py-2 border rounded-lg"
+            required
+          />
+        </div>
+
         {/* Description */}
         <div className="mb-4">
           <label className="block mb-2 text-sm font-semibold">Description</label>
           <textarea
-            value={productData.product_description}
-            onChange={(e) => setProductData({ ...productData, description: e.target.value })}
+            value={productData.product_description            }
+            onChange={(e) => setProductData({ ...productData, product_description: e.target.value })}
             className="w-full px-4 py-2 border rounded-lg"
             required
           />
@@ -169,7 +188,7 @@ const EditProduct = () => {
             <div className="mt-4 grid grid-cols-3 gap-4">
               {productData.product_other_images.map((image, index) => (
                 <div key={index} className="relative">
-                 <img src={`https://cloud.appwrite.io/v1/storage/buckets/66d864280006f50f934b/files/${image}/view?project=66d832a9001deb659a9e`} alt={`Other ${index}`} className="w-32 h-32 object-cover" />
+                  <img src={`https://cloud.appwrite.io/v1/storage/buckets/66d864280006f50f934b/files/${image}/view?project=66d832a9001deb659a9e`} alt={`Other ${index}`} className="w-32 h-32 object-cover" />
                   <div className="absolute inset-x-0 top-0 flex justify-center space-x-2 mt-1">
                     {index > 0 && (
                       <button type="button" onClick={() => moveImage(index, -1)} className="text-blue-500">
@@ -196,17 +215,46 @@ const EditProduct = () => {
         </div>
 
         {/* Tags */}
-        <div className="mb-4">
-  <label className="block mb-2 text-sm font-semibold">Tags</label>
-  <input
-    type="text"
-    value={productData.tags.join(', ')} // Convert the tags array to a string for display
-    onChange={(e) => setProductData({ ...productData, tags: e.target.value.split(',').map(tag => tag.trim()) })} // Update tags as an array
-    className="w-full px-4 py-2 border rounded-lg"
-    placeholder="Enter tags, separated by commas"
-  />
+<div className="mb-4">
+  <label className="block mb-2 text-sm font-semibold">Tags (Up to 3)</label>
+  {productData.tags.map((tag, index) => (
+    <div key={index} className="flex items-center mb-2">
+      <input
+        type="text"
+        value={tag || ''}
+        onChange={(e) => {
+          const updatedTags = [...productData.tags];
+          updatedTags[index] = e.target.value;
+          setProductData({ ...productData, tags: updatedTags });
+        }}
+        className="w-full px-4 py-2 border rounded-lg"
+        placeholder={`Tag ${index + 1}`}
+      />
+      <button
+        type="button"
+        className="ml-2 text-red-500"
+        onClick={() => {
+          const updatedTags = [...productData.tags];
+          updatedTags.splice(index, 1);
+          setProductData({ ...productData, tags: updatedTags });
+        }}
+      >
+        <FaTrashAlt />
+      </button>
+    </div>
+  ))}
+  {productData.tags.length < 3 && (
+    <button
+      type="button"
+      onClick={() => setProductData({ ...productData, tags: [...productData.tags, ''] })}
+      className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg"
+    >
+      Add Tag
+    </button>
+  )}
 </div>
 
+        {/* Save Changes Button */}
         <div className="flex justify-between">
           <button
             type="submit"
@@ -215,6 +263,9 @@ const EditProduct = () => {
             Save Changes
           </button>
         </div>
+
+        {/* Display message if any */}
+        {message && <p className="mt-4 text-green-500">{message}</p>}
       </form>
     </div>
   );

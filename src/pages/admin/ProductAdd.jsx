@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { databases, storage, ID } from '../lib/appwrite'; // Ensure this path is correct
+import { databases, storage, ID } from '../../lib/appwrite'; // Ensure this path is correct
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -12,7 +12,8 @@ const ProductAdd = () => {
   const [mainImage, setMainImage] = useState(null);
   const [otherImages, setOtherImages] = useState([]);
   const [simplePrice, setSimplePrice] = useState('');
-  const [tags, setTags] = useState(['']);
+  const [comparePrice, setcomparePrice] = useState('');
+  const [tags, setTags] = useState(['', '', '']); // State for up to 3 tags
   const [message, setMessage] = useState('');
 
   // Function to handle form submission
@@ -42,6 +43,7 @@ const ProductAdd = () => {
         tags: tags.filter(tag => tag), // Ensure empty tags are removed
         additional_description: additionalDescription || '', // Optional description
         price: parseFloat(simplePrice), // Handle simple pricing
+        compare_price: parseFloat(comparePrice) //
       };
 
       // Uploading other images
@@ -73,6 +75,13 @@ const ProductAdd = () => {
     }
   };
 
+ // Handle tag input changes
+ const handleTagChange = (index, value) => {
+  const updatedTags = [...tags];
+  updatedTags[index] = value;
+  setTags(updatedTags);
+};
+
   // Reset form after submission
   const resetForm = () => {
     setProductName('');
@@ -82,7 +91,8 @@ const ProductAdd = () => {
     setMainImage(null);
     setOtherImages([]);
     setSimplePrice('');
-    setTags(['']);
+    setTags(['', '', '']);
+    setcomparePrice('');
   };
 
   return (
@@ -145,6 +155,18 @@ const ProductAdd = () => {
             required
           />
         </div>
+
+      <div className="mb-4">
+          <label className="form-input">Compare Price (PKR)</label>
+          <input
+            type="number"
+            value={comparePrice}
+            onChange={(e) => setcomparePrice(e.target.value)}
+            className="custom-input"
+            placeholder="Enter price in PKR"
+            required
+          />
+        </div>
       </div>
 
       {/* Product Images */}
@@ -166,6 +188,21 @@ const ProductAdd = () => {
               </button>
             </div>
           )}
+        </div>
+
+                {/* Tags Input */}
+                <div className="mb-4">
+          <label className="form-input">Tags (Up to 3)</label>
+          {tags.map((tag, index) => (
+            <input
+              key={index}
+              type="text"
+              value={tag}
+              onChange={(e) => handleTagChange(index, e.target.value)}
+              className="custom-input"
+              placeholder={`Tag ${index + 1}`}
+            />
+          ))}
         </div>
 
         <div className="mb-4">

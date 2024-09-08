@@ -2,10 +2,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Signup from './pages/Signup';
 import Header from './components/Header';
 import Home from './pages/Home';
-import ProductAdd from './pages/ProductAdd';
-import ShowProduct from './pages/ShowProduct';
-import EditProduct from './pages/EditProduct';
-import ProductPage from './pages/ProductPage'; // Make sure the path is correct
+import ProductAdd from './pages/admin/ProductAdd';
+import ShowProduct from './pages/admin/ShowProduct';
+import EditProduct from './pages/admin/EditProduct';
+import ProductPage from './pages/ProductPage';
 
 import './App.css';
 import './index.css';
