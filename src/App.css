@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root layout settings */
+#root {
+  max-width: 1440px;
+  margin: 0 auto;
+  /* padding: 2rem; */
+  text-align: left; /* Left-align for better readability */
+}
+
+/* Logo styling */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  transition: filter 300ms;
+  will-change: filter;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+/* Logo spin animation for React */
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* Card styling */
+.card {
+  padding: 2em;
+  margin-bottom: 1.5em;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Documentation link styles */
+.read-the-docs {
+  color: #888;
+  font-size: 0.9em;
+}
+
+/* Form Elements */
+.custom-input {
+  width: 100%;
+  padding: 0.75em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+.custom-input:focus {
+  box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.3);
+  outline: none;
+}
+
+/* Form label */
+.lab-text {
+  font-size: 1.125rem;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+}
+
+/* Layout for form fields */
+.input-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+/* Button styles */
+.button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.75em 1.5em;
+  border-radius: 8px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Text area styling */
+.text-area {
+  width: 100%;
+  height: 120px;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 1em;
+}
+
+/* Form container for centering forms */
+.form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+  }
+  
+  .logo {
+    height: 4em;
+  }
+
+  .form-container {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+}
+
+.custom-input {
+  width: 100%;
+  padding: 0.75em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+.custom-input:focus {
+  box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.3);
+  outline: none;
+}
+
+.custom-button {
+  background-color: #007bff;
+  color: white;
+  padding: 0.75em 1.5em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #0056b3;
+}
