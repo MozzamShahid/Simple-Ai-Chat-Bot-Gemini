@@ -96,12 +96,14 @@ const ProductAdd = () => {
   };
 
   return (
-    <div className="form-container grid grid-cols-2 gap-4">
+    <div className="form-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="form-container">
       <ToastContainer /> {/* Add ToastContainer to show notifications */}
       {/* Product Text Fields */}
       <div>
+        <h1 className='text-3xl font-bold flex justify-center text-blue-500'>Add Your Product</h1>
         <div className="mb-4">
-          <label className="form-input">Product Title</label>
+          <label className="form-label">Product Title (*)</label>
           <input
             type="text"
             value={productName}
@@ -113,7 +115,7 @@ const ProductAdd = () => {
         </div>
 
         <div className="mb-4">
-          <label className="form-input">Description</label>
+          <label className="form-label">Description (*)</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -124,7 +126,7 @@ const ProductAdd = () => {
         </div>
 
         <div className="mb-4">
-          <label className="form-input">Product Link</label>
+          <label className="form-label">Product Link (*)</label>
           <input
             type="text"
             value={productLink}
@@ -135,7 +137,7 @@ const ProductAdd = () => {
         </div>
 
         <div className="mb-4">
-          <label className="form-input">Additional Description (Optional)</label>
+          <label className="form-label">Additional Description (Optional)</label>
           <textarea
             value={additionalDescription}
             onChange={(e) => setAdditionalDescription(e.target.value)}
@@ -145,7 +147,7 @@ const ProductAdd = () => {
         </div>
 
         <div className="mb-4">
-          <label className="form-input">Price (PKR)</label>
+          <label className="form-label">Price (PKR) (*)</label>
           <input
             type="number"
             value={simplePrice}
@@ -157,7 +159,7 @@ const ProductAdd = () => {
         </div>
 
       <div className="mb-4">
-          <label className="form-input">Compare Price (PKR)</label>
+          <label className="form-label">Compare Price (PKR)</label>
           <input
             type="number"
             value={comparePrice}
@@ -172,7 +174,7 @@ const ProductAdd = () => {
       {/* Product Images */}
       <div>
         <div className="mb-4">
-          <label className="form-input">Main Image (Max 2MB)</label>
+          <label className="form-label">Main Image (Max 2MB) (*)</label>
           <input
             type="file"
             onChange={(e) => setMainImage(e.target.files[0])}
@@ -190,23 +192,10 @@ const ProductAdd = () => {
           )}
         </div>
 
-                {/* Tags Input */}
-                <div className="mb-4">
-          <label className="form-input">Tags (Up to 3)</label>
-          {tags.map((tag, index) => (
-            <input
-              key={index}
-              type="text"
-              value={tag}
-              onChange={(e) => handleTagChange(index, e.target.value)}
-              className="custom-input"
-              placeholder={`Tag ${index + 1}`}
-            />
-          ))}
-        </div>
+        
 
         <div className="mb-4">
-          <label className="form-input">Other Images (Max 2MB each)</label>
+          <label className="form-label">Other Images (Max 2MB each) (*)</label>
           <input
             type="file"
             onChange={(e) => {
@@ -234,6 +223,20 @@ const ProductAdd = () => {
             </div>
           )}
         </div>
+        {/* Tags Input */}
+        <div className="mb-4">
+          <label className="form-label">Tags (Up to 3)</label>
+          {tags.map((tag, index) => (
+            <input
+              key={index}
+              type="text"
+              value={tag}
+              onChange={(e) => handleTagChange(index, e.target.value)}
+              className="custom-input flex mb-2"
+              placeholder={`Tag ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Submit Button */}
@@ -243,6 +246,30 @@ const ProductAdd = () => {
           Add Product
         </button>
       </div>
+    </div>
+    
+    {/* Secound Columns Button */}
+    <div className='form-container-3 m-4 '>
+    <section class="bg-blue-500 text-white rounded-md p-6 md:p-8">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">Product Registration Form</h2>
+        <p class="mb-4 text-lg">
+            Welcome to our product registration portal. To ensure your product is registered correctly, please follow these simple tips:
+        </p>
+        <ul class="list-disc list-inside mb-5 space-y-2">
+            <li>Ensure all required fields are filled out—these are marked with an asterisk (*).</li>
+            <li>Double-check your product serial number for accuracy to avoid delays in registration.</li>
+            <li>Provide a valid email address to receive confirmation and future updates about your product.</li>
+        </ul>
+        <p class="mb-5 text-lg">
+            This application was crafted with care by Mozzam, dedicated to providing free and easy-to-use solutions for everyday tasks. Our commitment is to enhance your experience without any cost.
+        </p>
+        <p class="text-lg">
+            If you have any questions or need assistance, feel free to contact our support team. Enjoy seamless product registration and stay tuned for more updates and features!
+        </p>
+    </div>
+</section>
+    </div>
     </div>
   );
 };

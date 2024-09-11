@@ -40,7 +40,7 @@
    @apply block mb-2 text-sm font-normal text-gray-700
   }
   .form-label{
-    @apply mb-2 text-sm font-semibold text-gray-700
+    @apply mb-2 text-sm font-normal text-gray-700
    }
 
   .form-container {
