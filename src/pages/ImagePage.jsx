@@ -7,7 +7,7 @@ const ImagePage = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // Construct the correct URL without any query params
+    // Construct the correct URL to fetch the image from Appwrite
     const url = `https://cloud.appwrite.io/v1/storage/buckets/66e973c7003947ebd191/files/${id}/view`;
 
     // Set the image URL
