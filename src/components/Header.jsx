@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // React Router for navigation
-import Signup from '../pages/Signup'; // Import the Signup component
 
 const Header = () => {
   return (
