@@ -7,8 +7,8 @@ export const client = new Client();
 //     .setProject('66e956f4001e45b2a9aa');
 
 client
-    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT) // Appwrite endpoint
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID); // Appwrite project ID
+    .setEndpoint(import.meta.env.VITE_APPWRITE_ENDPOINT) // Appwrite endpoint
+    .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID); // Appwrite project ID
 
 export const account = new Account(client);
 export const databases = new Databases(client);
