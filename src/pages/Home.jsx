@@ -21,7 +21,7 @@ const Home = () => {
       const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/66e973c7003947ebd191/files/${imageId}/view`;
 
       // Set the QR code URL to match the dynamic route
-      const qrUrl = `https://imgtoqr.vercel.app/imagepage/${imageId}`; // Update this URL pattern
+      const qrUrl = `https://imgtoqr.vercel.app/imagepage/${imageId}`; // Dynamic URL
 
       setImageUrl(imageUrl);
       setUniquePageUrl(qrUrl);
@@ -69,6 +69,11 @@ const Home = () => {
             <div style={styles.qrContainer}>
               <QRCode value={uniquePageUrl} size={256} />
               <p style={styles.qrText}>Scan this QR code to view your image!</p>
+              
+              {/* Visit the Page Button */}
+              <a href={uniquePageUrl} target="_blank" rel="noopener noreferrer">
+                <button style={styles.visitButton}>Visit the Page</button>
+              </a>
             </div>
           )}
         </div>
@@ -126,6 +131,16 @@ const styles = {
     fontSize: '1.2rem',
     color: '#333',
   },
+  visitButton: {
+    marginTop: '15px',
+    padding: '10px 20px',
+    fontSize: '16px',
+    backgroundColor: '#4CAF50',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+  }
 };
 
 export default Home;
