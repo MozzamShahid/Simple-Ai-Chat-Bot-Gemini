@@ -21,7 +21,7 @@ const Home = () => {
       const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/66e95a11000852c1c800/files/${imageId}/view`;
       
       // Replace localhost with a placeholder or public URL
-      const qrUrl = `https://your-vercel-domain.vercel.app/${imageId}`; // Update this once deployed
+      const qrUrl = `https://imgtoqr.vercel.app/${imageId}`; // Update this once deployed
 
       setImageUrl(imageUrl);
       setUniquePageUrl(qrUrl);
