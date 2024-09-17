@@ -13,12 +13,12 @@ const Home = () => {
     try {
       // Upload image to the storage bucket
       const response = await storage.createFile(
-        '66e95a11000852c1c800', // Your storage bucket ID
+        '66e973c7003947ebd191', // Your storage bucket ID
         ID.unique(),  // Generates a unique ID for the image
         file
       );
       const imageId = response.$id;  // Capture the image ID from the response
-      const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/66e95a11000852c1c800/files/${imageId}/view`;
+      const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/66e973c7003947ebd191/files/${imageId}/view`;
       
       // Replace localhost with a placeholder or public URL
       const qrUrl = `https://imgtoqr.vercel.app/${imageId}`; // Update this once deployed
@@ -28,8 +28,8 @@ const Home = () => {
 
       // Now store the image URL and QR URL in the database
       const document = await databases.createDocument(
-        '66e95a290036f79e8e9c', // Database ID: imgtoqr
-        '66e95a3300135a825e7f', // Collection ID: imgqr
+        '66e973f1001b10c37a45', // Database ID: imgtoqr
+        '66e9740300398104fc67', // Collection ID: imgqr
         ID.unique(), // Document ID (you can use ID.unique() for auto generation)
         {
           image_qr: imageUrl,   // Store the image URL in image_qr
