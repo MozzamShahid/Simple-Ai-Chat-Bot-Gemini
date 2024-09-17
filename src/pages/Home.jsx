@@ -20,8 +20,8 @@ const Home = () => {
       const imageId = response.$id;  // Capture the image ID from the response
       const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/66e973c7003947ebd191/files/${imageId}/view`;
 
-      // Update this to reflect the dynamic route you just created
-      const qrUrl = `https://imgtoqr.vercel.app/${imageId}`; // This is the dynamic route
+      // Set the QR code URL to match the dynamic route
+      const qrUrl = `https://imgtoqr.vercel.app/imagepage/${imageId}`; // Update this URL pattern
 
       setImageUrl(imageUrl);
       setUniquePageUrl(qrUrl);
