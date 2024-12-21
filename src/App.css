@@ -4,8 +4,11 @@
 
 /* Root layout settings */
 #root {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  box-sizing: border-box;
+  background-color: #002c63;
   max-width: 1440px;
-  margin: 0 auto;
+  margin: auto;
   /* padding: 2rem; */
   text-align: left; /* Left-align for better readability */
 }
