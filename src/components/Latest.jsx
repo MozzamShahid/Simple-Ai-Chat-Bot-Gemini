@@ -12,7 +12,7 @@ const Latest = () => {
         const usermsg = { type: 'user', content: userMessage }
         setConversation((prev) => [...prev, usermsg])
        
-        const genAI = new GoogleGenerativeAI("AIzaSyDaC7HxL_n5UjJSaeZhg2AsU5oWKJUmXv0");
+        const genAI = new GoogleGenerativeAI("ENTER-YOUR-API-KEY");
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
         const prompt = userMessage;
